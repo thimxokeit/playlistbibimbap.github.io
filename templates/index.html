@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
+
+    <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!--스타일 시트 연결/커밋테스트-->
+    <link rel="stylesheet" href="./static/css/style.css">
+
+    <title>Playlist Bibimbap</title>
+
+    <style>
+        /*상단 + 슬라이드 */
+        * {
+            font-family: 'Pretendard';
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+
+        .cover {
+            clear: both;
+
+            color: goldenrod;
+            width: 100%;
+            height: 95%;
+            max-height: 320px;
+
+            background-color: #fcc221;
+            background-size: cover;
+            background-position: center;
+
+            color: black;
+
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+
+        }
+
+        .cover_bibimbap {
+            margin: 10px;
+            text-align: left;
+        }
+
+        .cover_title {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .landing {
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .btn btn-outline-dark {
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-container {
+            margin: 0 auto;
+
+            min-height: 330px;
+            max-width: 1200px;
+            width: 95%;
+            margin-top: 70px;
+            background-color: #fcc221;
+            text-align: center;
+            display: inline-flex;
+            overflow: auto;
+
+
+        }
+
+        .container-fluid {
+            margin-top: 10px;
+            width: 100%;
+
+            min-height: 250px;
+            align-items: center;
+            text-align: center;
+            background-color: #fcc221;
+            display: inline-block;
+        }
+
+        .carousel-inner {
+            display: flex;
+            width: 70%;
+            max-width-wrapper: 1400px;
+
+            height: 300px;
+            min-height: 100px;
+            margin-top: 5px;
+            align-content: center;
+            text-align: center;
+            display: inline-block;
+            overflow: inherit;
+        }
+
+        .carousel-item {
+            width: 100%;
+            min-height: 150px;
+            max-height: 150px;
+            align-content: center;
+            margin: 5px;
+        }
+
+        .carousel-item > button {
+            width: 100%;
+            height: 100%;
+            position: center;
+            border-radius: 50px;
+            border: 1px solid white;
+        }
+
+        .carousel-item active {
+            width: 100%;
+            min-height: 150px;
+            max-height: 100%;
+            align-content: center;
+        }
+
+        .carousel-item active > button {
+            width: 100%;
+            height: 100%;
+            position: center;
+            border-radius: 50px;
+            border: 1px solid white;
+            background-color: rgba(0, 0, 0, 0);
+
+        }
+
+        .carousel-control-prev > button {
+            position: absolute;
+            transform: translatex(50%);
+            width: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
+            color: white;
+            text-align: center;
+        }
+
+        .carousel-control-next > button {
+            position: absolute;
+            transform: translatex(-50%);
+            width: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
+            color: white;
+            text-align: center;
+        }
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+
+
+        .popup_add_song {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .popup_add_song .contents {
+            margin: 200px auto;
+            width: 430px;
+            height: 420px;
+            border-radius: 28px;
+            background-color: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup_add_song .contents .btn_close {
+            position: absolute;
+            top: 26px;
+            right: 26px;
+        }
+
+        .popup_add_song .contents > img {
+            width: 240px;
+            margin-bottom: 26px;
+        }
+
+        .popup_add_song .contents > p {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .popup_add_song .contents > strong {
+            font-weight: 800;
+        }
+
+        .songs_time {
+            display: inline-block;
+            background-color: #f6f6f6;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: auto;
+            margin-top: 450px;
+        }
+
+        .songs_time > h1 {
+            font-size: 32px;
+            text-align: center;
+            padding: 58px 0 32px 50px;
+        }
+
+        .songs_time .cards {
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, minmax(200px, auto));
+            width: 100%;
+            min-height: 300px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+
+
+        .songs_time .cards {
+            width: 100%;
+            height: 100%;
+        }
+
+        .songs_time .cards row row-cols-7 > img {
+            width: 95%;
+            max-width: 80px;
+            height: 95%;
+            max-height: 160px;
+        }
+
+        .songs_time .card .card-header {
+            width: 100%;
+            height: 177px;
+            padding: 0;
+        }
+
+        .songs_time .card .card-header > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .songs_time .card .card-body {
+            padding-bottom: 0;
+            margin-bottom: 6px;
+        }
+
+        .songs_time .card .card-body .track {
+            font-size: 18px;
+            font-weight: 900;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .songs_time .card .card-body .count {
+            font-size: 14px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .songs_time .card .card-body .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp: 0;
+        }
+
+        .songs_time .card .card-footer {
+            border: 0px;
+            background-color: #fff;
+        }
+
+        .songs_time .card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .songs_time .card .card-footer .artist {
+            font-size: 14px;
+            width: 50%;
+            font-weight: 600;
+            opacity: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        #description_button {
+            font-size: smaller;
+        }
+
+
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script>
+        function description_show() {
+            document.getElementById('description').style.display = 'block';
+            let button = document.getElementById("description_button");
+            let image = document.getElementById("description");
+
+            button.addEventListener("click", function () {
+                if (image.style.display === "none") {
+                    image.style.display = "block";
+                } else {
+                    image.style.display = "none";
+                }
+            });
+
+
+        }
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#search_button').click(function (event) {
+
+                event.preventDefault();
+                let input = $('#track').val();
+                if (input.length === 0) {
+                    alert("모아 들을 노래를 검색해주세요!");
+                } else {
+                    spotify_search();
+                }
+            });
+        })
+
+    </script>
+
+    <script>
+
+        function spotify_search() {
+            let track = $('#track').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/search_results",
+                data: {'track_input': track},
+                success: function (response) {
+                    window.location.reload()
+
+                },
+
+            });
+        }
+    </script>
+
+    <script>
+        let audio = document.getElementById("play");
+        let playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.popup_add_song').hide();
+            getTracks()
+        })
+
+        function getTracks() {
+
+            $.ajax({
+                type: "GET",
+                url: "/search_results",
+                data: {},
+                success: function (response) {
+                    let tracks = response.track;
+                    tracks.sort((a, b) => b.timestamp - a.timestamp);
+                    let tracksList = $("#tracks-list");
+                    tracksList.empty();
+                    let top5Tracks = tracks.slice(0, 5);
+                    top5Tracks.forEach(function (track) {
+                        let tracksList = `
+                                <div class="col-sd-4">
+                                    <div class="card">
+                                        <img id="image_result" src="${track.image}" alt="Track Image" style="height:100%;">
+                                            <div class="card-body">
+                                                <h5 class="card-title" id="track_result">${track.track}</h5>
+                                                <div class="position-absolute bottom-0 end-0">
+                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
+                                                </div>
+                                                <div>
+                                                    <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
+                                                    </button>
+                                                    <audio id="play">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
+                                                    </audio>
+                                                </div>
+                                                <p class="card-text" id="artists_result">${track.artists}</p>
+                                            </div>
+                                    </div>
+                                </div>`
+                        $('#carousel-first').append(tracksList);
+                    });
+
+                    let next5Tracks = tracks.slice(5, 10);
+                    next5Tracks.forEach(function (track) {
+                        let tracksList = `
+                                <div class="col-sd-4">
+                                    <div class="card">
+                                        <img id="image_result" src="${track.image}"  alt="Track Image" style="height:100%;">
+                                            <div class="card-body">
+                                                <h5 class="card-title" id="track_result">${track.track}</h5>
+                                                <div class="position-absolute bottom-0 end-0">
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
+                                                </div>
+                                                <div>
+                                                    <button  onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
+                                                    </button>
+                                                    <audio id="play">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
+                                                    </audio>
+                                                </div>
+                                                <p class="card-text" id="artists_result">${track.artists}</p>
+                                            </div>
+                                    </div>
+                                </div>`
+                        $('#carousel-second').append(tracksList);
+
+                    })
+
+                }
+            });
+        }
+
+    </script>
+    <script>
+        function popup_show() {
+            document.getElementById('popup').style.display = 'block';
+            setTimeout(function () { }, 4000);
+        }
+
+
+        function select_track(button) {
+            let selected_track = $(button).closest(".card").find("#track_result").text();
+            let selected_artists = $(button).closest(".card").find("#artists_result").text();
+            let selected_image = $(button).closest(".card").find("#image_result").attr("src");
+            let selected_preview = $(button).closest(".card").find("#preview_result").attr("src");
+
+            console.log(selected_track, selected_artists, selected_image, selected_preview)
+
+            $.ajax({
+                type: "POST",
+                url: "/playlist",
+                data: {'select_track': selected_track, 'select_artists': selected_artists},
+                success: function (response) {
+                },
+            });
+            window.location.reload()
+        }
+
+
+        /*let selectedTrack = `<div class="col">
+                    <div class="cards" id="songs_time">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="${selected_image}" alt="Track Image" style="height: 100%; width: 100%;"">
+                                    <h5 class="card-title" id="selected_tracks">${selected_track}</h5>
+                                    <p class="count">${count}명이 듣고 있어요</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">${selected_artists}</p>
+                                <button class="likes">
+                                <i class="fa-solid fa-heart fa-2x"></i>
+                                    <strong>0</strong>
+                                </button>
+                                 <button onClick="preview_play(this.nextElementSibling)"
+                                            style="border:0; outline:0; background-color:transparent;">
+                                        <i class="fa-brands fa-spotify fa-2x"></i>
+                                 </button>
+                                 <audio id="play">
+                                     <source src="${selected_preview}" type="audio/mpeg">
+                                 </audio>
+                            </div>
+                        </div>
+                    </div>`
+
+        $('#cards-box').prepend(selectedTrack)*/
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            selected_trackLists();
+        });
+
+        function selected_trackLists() {
+            $.ajax({
+                type: 'GET',
+                url: '/playlist',
+                data: {},
+                success: function (response) {
+                    let selectedTracks = response.selected_track;
+                    selectedTracks.sort((a, b) => b.timestamp - a.timestamp);
+                    selectedTracks.forEach(function (selected_track) {
+                        let selected_trackList = `<div class="col">
+                            <div class="cards" id="songs_time">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="${selected_track.image}" alt="Track Image" style="height: 100%; width: 100%;">
+                                            <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
+                                            <p class="count">${selected_track.count}명이 듣고 있어요</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <p class="card-text">${selected_track.artists}</p>
+                                        <button id="like" class="likes">
+                                        <i class="fa-solid fa-heart fa-2x"></i>
+                                            <strong>0</strong>
+                                        </button>
+
+                                         <button onClick="preview_play(this.nextElementSibling)"
+                                                    style="border:0; outline:0; background-color:transparent; margin-left: 5px; ">
+                                                <i class="fa-brands fa-spotify fa-2x"></i>
+                                         </button>
+                                         <audio id="play">
+                                             <source src=${selected_track.url} type="audio/mpeg">
+                                         </audio>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+
+                        $('#cards-box').append(selected_trackList)
+                    });
+                }
+            })
+        }
+
+    </script>
+
+    <script>
+        const btns_like = document.getElementById('like')
+
+        btns_like.forEach((item, index) => {
+            item.addEventListener('click', function () {
+                let count = parseInt(item.children[1].innerText)
+                count += 1
+                item.children[1].innerText = count
+            })
+        })
+   </script>
+
+
+</head>
+
+<body>
+<!-- 상단 커버(심소연님) -->
+
+<div class="allpage">
+    <div class="cover">
+        <div class="cover_bibimbap">
+            <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
+                Bibimbap</b>
+            </button>
+        </div>
+        <div class="cover_title">
+            <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
+
+        </div>
+        <div class="input-group mb-3" style="width: 60%; min-width:200px; align-self: center; margin-top: 20px;">
+            <input id="track" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!">
+
+            <button class="btn btn-dark" type="submit" id="search_button" onclick="spotify_search()">
+                <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+            </button>
+
+        </div>
+
+        <div class="box clearfix">
+
+
+            <div id="landingContainer" class="landing" style="justify-content: center;">
+                <center>
+                    <button type="button" class="btn btn-outline-dark" id="description_button"
+                            onclick="description_show()"
+                            style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
+                        <i class="fa-solid fa-spoon"></i>
+                        Playlist Bibimbap이 무엇인가요?
+                        <i class="fa-solid fa-spoon"></i>
+                    </button>
+
+                    <br>
+                    <img id="description"
+                         src="/static/img/description_img.png"
+                         style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
+                </center>
+            </div>
+        </div>
+
+        <!-- 슬라이드(박드림님)-->
+        <div class="carousel-container">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="container-fluid">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-first">
+
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-second">
+
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup_add_song" id="popup" style="display: none;">
+        <div class="contents">
+            <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
+            <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
+        </div>
+    </div>
+
+
+    <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
+
+
+    <div class="songs_time">
+        <h1>
+            <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
+        </h1>
+        <div class="cards row row-cols-5" id="cards-box" style="align-items: center;justify-content: center; margin: auto;">
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
